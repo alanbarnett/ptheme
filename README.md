@@ -1,5 +1,6 @@
 # Installation
-Add the following line to your bashrc:
+Remove (or comment out) all `PS1` and `PROMPT_COMMAND` configuration from your
+bashrc and add the following line:
 
 `. [path_to_prompt.sh]`
 
