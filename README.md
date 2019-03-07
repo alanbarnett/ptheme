@@ -84,6 +84,5 @@ with quotes.
 `gpt` is a command that will turn on or off the git branch information in the
 prompt, by changing the `GIT_PROMPT` variable (note that the only reason this
 works is because I check the value of the `GIT_PROMPT` variable before running
-any git commands in the prompt scripts). You should initialize the `GIT_PROMPT`
-variable in your own `prompt.sh` if you plan on using git information, but note
-that you do not have to.
+any git commands in the prompt scripts). You should export the `GIT_PROMPT`
+variable in your own `prompt.sh` if you plan on using git information.
