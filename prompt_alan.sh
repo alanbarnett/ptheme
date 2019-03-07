@@ -10,7 +10,7 @@ export PROMPT_BASE_DIR="$HOME/bin/bash_prompt"
 export PROMPT_THEME_DIR="$PROMPT_BASE_DIR/themes"
 
 # Variable to enable/disable git information in prompt
-GIT_PROMPT=1
+export GIT_PROMPT=1
 
 # }}}
 
@@ -35,4 +35,4 @@ PROMPT_COMMAND=prompt_command
 # How many directories to display before truncating
 PROMPT_DIRTRIM=8
 
-# vim: foldmethod=marker, foldmarker={{{,}}}
+# vim: foldmethod=marker foldmarker={{{,}}}
