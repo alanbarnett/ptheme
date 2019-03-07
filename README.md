@@ -70,4 +70,6 @@ or 5)
 quick editing)
 
 `pt` is a command that will switch your theme with whatever you give it as an
-argument (ex. `pt default`)
+argument (ex. `pt default`). With no arguments it prints the current theme. If
+you want to switch to a theme with spaces in the name, you must surround it
+with double quotes.
