@@ -58,6 +58,6 @@ You will need to change the variable `PROMPT_BASE_DIR` to the directory that
 you cloned this repository. Additionally, the variable `PROMPT_THEME` sets the
 default theme.
 
-# *other goodies
+## *other goodies
 `ept` is a command that will open your editor with the current theme (for quick
 editing) (IN PROGRESS)
