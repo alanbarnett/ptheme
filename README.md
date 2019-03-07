@@ -30,7 +30,7 @@ bashrc, and add the following line:
 
 It will source the `prompt.sh` file, which exports some default variables
 needed for the themes to work, and has the functions set up to use
-`PROMPT_COMMAND` with whatever theme you choose (also some other goodies).
+`PROMPT_COMMAND` with whatever theme you choose (also some other goodies*).
 
 You could also just copy the section below and paste it into your `.bashrc` for
 the basic functionality.
@@ -42,18 +42,22 @@ export PROMPT_THEME="default"
 # Path of base directory (used in theme scripts to find bin folder)
 export PROMPT_BASE_DIR="$HOME/bin/bash_prompt"
 
-function prompt_command {
-    RET="$?"
-    PS1=$("$PROMPT_BASE_DIR"/themes/"$PROMPT_THEME" "$RET")
+prompt_command ()
+{
+    PS1=$("$PROMPT_BASE_DIR"/themes/"$PROMPT_THEME" "$?")
 }
 
 PROMPT_COMMAND=prompt_command
 ```
 
-The included themes take the return value of the last command as the only
-parameter, but of course it doesn't need to be used. This just happens to be
-the nicest way to do it.
+The included themes take the return value of the last command (`$?`) as the
+only parameter, but of course it doesn't need to be used. This just happens to
+be the nicest way to do it.
 
 You will need to change the variable `PROMPT_BASE_DIR` to the directory that
 you cloned this repository. Additionally, the variable `PROMPT_THEME` sets the
 default theme.
+
+# *other goodies
+`ept` is a command that will open your editor with the current theme (for quick
+editing) (IN PROGRESS)
