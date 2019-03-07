@@ -2,18 +2,12 @@
 
 # Config {{{
 
-# Variable for control of git information in my prompt
-GIT_PROMPT=1
-
 # String for the date command
 DATE_SEQ="+%I:%M %P"
 
 # }}}
 
 # Shortcut variables {{{
-
-# Save the exit value of the last command
-RET="$1"
 
 # Color shortcut variables
 RED='\[\e[1;31m\]'
@@ -30,6 +24,9 @@ BOX_HORIZ='\342\224\200'
 
 # }}}
 
+# Save the exit value of the last command (comes in as $1)
+RET="$1"
+
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$PROMPT_BASE_DIR/bin"
@@ -40,6 +37,7 @@ ${CYAN}\h${WHITE}]\
 ${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
 ${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
 ${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
+${BOX_HORIZ}[${RED}${RET}${WHITE}]\
 $(need_to_reboot.sh)\
 \n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
 
