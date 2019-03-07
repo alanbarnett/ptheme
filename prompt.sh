@@ -19,3 +19,9 @@ ept ()
 {
 	"$EDITOR" "$PROMPT_BASE_DIR"/themes/"$PROMPT_THEME"
 }
+
+# Function to quickly switch themes
+pt ()
+{
+	PROMPT_THEME="$@"
+}
