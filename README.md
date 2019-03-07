@@ -59,5 +59,13 @@ you cloned this repository. Additionally, the variable `PROMPT_THEME` sets the
 default theme.
 
 ## *other goodies
-`ept` is a command that will open your editor with the current theme (for quick
-editing) (IN PROGRESS)
+The included prompt.sh (the one that I use) has these additional things
+defined:
+
+`PROMPT_DIRTRIM` is a bash variable that truncates how many directories are
+shown with the `\w` prompt escape code (I have mine set to 8, because my
+prompt is two lines. A reasonable value for a one line prompt is closer to 4
+or 5)
+
+`ept` is a command that will open your `$EDITOR` with the current theme (for
+quick editing)
