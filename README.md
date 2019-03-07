@@ -1,6 +1,8 @@
 # Installation
 Add the following line to your bashrc:
+
 `. [path_to_prompt.sh]`
+
 It will source the `prompt.sh` file, which exports some default variables
 needed for the themes to work, and has the functions set up to use
 `PROMPT_COMMAND` with whatever theme you choose.
@@ -33,6 +35,9 @@ include it. Also, the included themes will NOT have a .sh extension, while all
 additional scripts that are used WILL have the .sh extension.
 
 To change themes from the command line:
+
 `$ PROMPT_THEME="theme name"`
+
 ex.
+
 `$ PROMPT_THEME=twoline`
