@@ -11,7 +11,7 @@ with your own additional configuration if needed (for example, my
 `prompt_alan.sh` file sources `utils.sh`, which includes a few functions for
 managing your prompt from the command line. See *other goodies for more info).
 The things in `prompt.sh` are only run once, where the things in the
-`PROMPT_COMMAND` variable are run for every time you get a new prompt.
+`PROMPT_COMMAND` variable are run every time you get a new prompt.
 
 Additional themes should be placed in the base/themes folder. The included
 themes place all used scripts inside the base/bin folder, and locally set the
