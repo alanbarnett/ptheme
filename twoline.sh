@@ -8,6 +8,9 @@ RET="$1"
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$HOME/bin/bash_prompt"
 
+# String for the date command
+DATE_SEQ="+%I:%M %P"
+
 # Color shortcut variables
 RED='\[\e[1;31m\]'
 GREEN='\[\e[1;32m\]'
@@ -21,11 +24,10 @@ BOX_TOPL='\342\224\214'
 BOX_BOTL='\342\224\224'
 BOX_HORIZ='\342\224\200'
 
-DATE_SEQ="+%I:%M %P"
-
 echo "${WHITE}${BOX_TOPL}[${CYAN}\u\
 $(network_status.sh)\
 ${CYAN}\h${WHITE}]\
 ${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
 ${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
+${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
 \n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
