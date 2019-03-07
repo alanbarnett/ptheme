@@ -30,4 +30,5 @@ ${CYAN}\h${WHITE}]\
 ${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
 ${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
 ${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
+$(need_to_reboot.sh)\
 \n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
