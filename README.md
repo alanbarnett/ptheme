@@ -1,6 +1,5 @@
 # Information
-Here's the stackoverflow question that started this whole project: 
-https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command
+Here's the [stackoverflow question](https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command) that started this whole project
 
 The file `prompt.sh` has the basic setup for adding this into your bashrc.
 Basically, you make a function that sets `PS1` to a script, and call that
