@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Config {{{
+
+# Variable for control of git information in my prompt
+GIT_PROMPT=1
+
+# String for the date command
+DATE_SEQ="+%I:%M:%S %P"
+
+# }}}
+
+# Shortcut variables {{{
+
+# Save the exit value of the last command
+RET="$1"
+
+# Color shortcut variables
+RED='\[\e[1;31m\]'
+GREEN='\[\e[1;32m\]'
+BLUE='\[\e[1;34m\]'
+CYAN='\[\e[1;36m\]'
+WHITE='\[\e[1;37m\]'
+NORM='\[\e[m\]'
+
+# Box printing shortcut variables
+BOX_TOPL='\342\224\214'
+BOX_BOTL='\342\224\224'
+BOX_HORIZ='\342\224\200'
+
+# }}}
+
+# Update path to include folder with necessary prompt scripts
+# NOTE: This doesn't update the path outside this script
+PATH="$PATH:$PROMPT_BASE_DIR/bin"
+
+echo "${WHITE}${BOX_TOPL}[${CYAN}\u@\h${WHITE}]\
+${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
+${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
+\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
+
+# vim: foldmethod=marker foldmarker={{{,}}}
