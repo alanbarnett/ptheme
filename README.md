@@ -12,7 +12,7 @@ themes place all used scripts inside the base/bin folder, and locally set the
 PATH to include it. Also, the included themes will NOT have a .sh extension,
 while all additional scripts that are used WILL have the .sh extension.
 
-To change themes from the command line:
+To change themes from the command line (also see *other goodies):
 
 `$ PROMPT_THEME="theme name"`
 
@@ -59,7 +59,7 @@ you cloned this repository. Additionally, the variable `PROMPT_THEME` sets the
 default theme.
 
 ## *other goodies
-The included prompt.sh (the one that I use) has these additional things
+The included `prompt.sh` (the one that I use) has these additional things
 defined:
 
 `PROMPT_DIRTRIM` is a bash variable that truncates how many directories are
@@ -69,3 +69,6 @@ or 5)
 
 `ept` is a command that will open your `$EDITOR` with the current theme (for
 quick editing)
+
+`pt` is a command that will switch your theme with whatever you give it as an
+argument (ex. `pt default`)
