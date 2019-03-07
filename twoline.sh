@@ -27,4 +27,5 @@ echo "${WHITE}${BOX_TOPL}[${CYAN}\u\
 $(network_status.sh)\
 ${CYAN}\h${WHITE}]\
 ${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
+${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
 \n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
