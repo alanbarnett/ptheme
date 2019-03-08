@@ -1,10 +1,10 @@
 # This file contains useful functions that you might want to include in all
 # different profiles
 
-# Function to open the current theme in your editor
-ept ()
+# Function to list available themes
+lpt ()
 {
-	"$EDITOR" "$PROMPT_THEME_DIR"/"$PROMPT_THEME"
+	ls "$PROMPT_THEME_DIR"
 }
 
 # Function to quickly switch themes
@@ -22,6 +22,12 @@ pt ()
 			echo "Theme not in $PROMPT_THEME_DIR"
 		fi
 	fi
+}
+
+# Function to open the current theme in your editor
+ept ()
+{
+	"$EDITOR" "$PROMPT_THEME_DIR"/"$PROMPT_THEME"
 }
 
 # Function to easily set the GIT_PROMPT variable
