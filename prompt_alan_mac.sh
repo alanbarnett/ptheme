@@ -1,7 +1,7 @@
 # Variables {{{
 
 # Default prompt theme
-export PROMPT_THEME="twoline_mac"
+export PROMPT_THEME="twoline-mac"
 
 # Path of base directory (used in theme scripts to find bin folder)
 export PROMPT_BASE_DIR="$HOME/clones/ptheme"
