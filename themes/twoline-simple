@@ -2,18 +2,12 @@
 
 # Config {{{
 
-# Variable for control of git information in my prompt
-GIT_PROMPT=1
-
 # String for the date command
 DATE_SEQ="+%I:%M:%S %P"
 
 # }}}
 
 # Shortcut variables {{{
-
-# Save the exit value of the last command
-RET="$1"
 
 # Color shortcut variables
 RED='\[\e[1;31m\]'
@@ -29,6 +23,9 @@ BOX_BOTL='\342\224\224'
 BOX_HORIZ='\342\224\200'
 
 # }}}
+
+# Save the exit value of the last command
+RET="$1"
 
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
