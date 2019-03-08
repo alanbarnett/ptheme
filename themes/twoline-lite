@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Save the return value of the last command
+RET="$1"
+
+# Update path to include folder with necessary prompt scripts
+# NOTE: This doesn't update the path outside this script
+PATH="$PATH:$PROMPT_BASE_DIR/bin"
+
+# Clear ret 
+if [ "$RET" -eq 0 ]; then
+	RET=""
+fi
+
+# Color shortcut variables
+RED='\[\e[1;31m\]'
+DARK_GREEN='\[\e[0;32m\]'
+GREEN='\[\e[1;32m\]'
+DARK_MAGENTA='\[\e[0;35m\]'
+CYAN='\[\e[1;36m\]'
+DARK_CYAN='\[\e[0;36m\]'
+WHITE='\[\e[1;37m\]'
+NORM='\[\e[m\]'
+
+echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w \
+${DARK_GREEN}$(git_prompt_lite.sh)\
+\n${RED}${RET} ${WHITE}$ ${NORM}"
+
+# vim: foldmethod=marker foldmarker={{{,}}}
