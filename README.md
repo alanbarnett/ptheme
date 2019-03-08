@@ -17,17 +17,17 @@ specify each time you display `PS1`.
 
 The `prompt.sh` file is just the default. You are encouraged to make your own,
 with your own additional configuration if needed (for example, my
-`prompt_alan.sh` file sources `utils.sh`, which includes a few functions for
-managing your prompt from the command line. See *other goodies for more info).
-The things in `prompt.sh` are only run once, where the things in the
-`PROMPT_COMMAND` variable are run every time you get a new prompt.
+`prompt_alan.sh` file sources `plugins/utils.sh`, which includes a few
+functions for managing your prompt from the command line. See **plugins** for
+more info). The things in `prompt.sh` are only run once, where the things in
+the `PROMPT_COMMAND` variable are run every time you get a new prompt.
 
 Additional themes should be placed in the base/themes folder. The included
 themes place all used scripts inside the base/bin folder, and locally set the
 PATH to include it. Also, the included themes will NOT have a .sh extension,
 while all additional scripts that are used WILL have the .sh extension.
 
-To change themes from the command line (also see *other goodies):
+To change themes from the command line (also see **plugins**)
 
 `$ PROMPT_THEME="theme name"`
 
@@ -36,8 +36,8 @@ ex.
 `$ PROMPT_THEME=twoline-lite`
 
 It is not yet multi-shell compatible, but I imagine that it could be. I would
-need to write a prompt file and possibly also a theme file for the other shells,
-or look into ways to make the theme files work for any shell.
+need to write a prompt file and possibly also a theme file for the other
+shells, or look into ways to make the theme files work for any shell.
 
 ## Installation
 
@@ -81,12 +81,14 @@ You will need to change the variable `PROMPT_BASE_DIR` to the directory where
 you cloned this repository. Additionally, the variable `PROMPT_THEME` sets the
 default theme.
 
-### *other goodies
+### plugins
 
-The included `utils.sh` file has these additional things defined. To use them,
-source the `utils.sh` file in your custom `prompt.sh` file the same way you
-source your `prompt.sh` in your `.bashrc` (see `prompt_alan.sh` for an
-example).
+#### plugins/utils.sh
+
+The included `plugins/utils.sh` file has these additional things defined. To
+use them, source the `plugins/utils.sh` file in your custom `prompt.sh` file
+the same way you source your `prompt.sh` in your `.bashrc` (see `prompt_alan.sh`
+for an example).
 
 `lpt` is a command that simply runs `ls` on the `$PROMPT_THEME_DIR` folder.
 
@@ -98,8 +100,12 @@ with quotes.
 `ept` is a command that will open your `$EDITOR` with the current theme (for
 quick editing)
 
-`gpt` is a command that will turn on or off the git branch information in the
+#### plugins/git.sh
+
+Also included is the `plugins/git.sh` file, which has the exported variable to
+control git printing, and this function to set it from the command line:
+
+`gitpt` is a command that will turn on or off the git branch information in the
 prompt, by changing the `GIT_PROMPT` variable (note that the only reason this
 works is because I check the value of the `GIT_PROMPT` variable before running
-any git commands in the prompt scripts). You should export the `GIT_PROMPT`
-variable in your own `prompt.sh` if you plan on using git information.
+any git commands in the prompt scripts).
