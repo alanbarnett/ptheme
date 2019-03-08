@@ -1,7 +1,34 @@
 #!/bin/sh
 
+#
+####    ptheme default theme    ####
+#
+# Here is the default theme. It
+# includes your username, hostname,
+# working directory, and the return
+# status of the last command, if
+# it's something other than 0.
+#
+# ##  NOTICE  ##
+# This script will run every time
+# you hit enter, so just remember
+# that when you add extra functions
+# and wonder why it's slowing down.
+# ##  ######  ##
+#
+####    ####################    ####
+#
+
 # Save the return value of the last command
 RET="$1"
+
+# Make an error message (to add spacing to error code)
+ERROR=""
+
+# Clear ret 
+if [ "$RET" -ne 0 ]; then
+	ERROR="$RET "
+fi
 
 # Color shortcut variables
 RED='\[\e[1;31m\]'
@@ -11,4 +38,4 @@ DARK_CYAN='\[\e[0;36m\]'
 WHITE='\[\e[1;37m\]'
 NORM='\[\e[m\]'
 
-echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w ${RED}${RET} ${WHITE}$ ${NORM}"
+echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w ${RED}${ERROR}${WHITE}$ ${NORM}"
