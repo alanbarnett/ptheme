@@ -3,7 +3,7 @@
 # Config {{{
 
 # String for the date command
-DATE_SEQ="+%I:%M %P"
+DATE_SEQ="+%I:%M:%S %P"
 
 # }}}
 
