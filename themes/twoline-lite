@@ -1,16 +1,30 @@
 #!/bin/sh
 
+# Config {{{
+
 # Save the return value of the last command
 RET="$1"
+
+# Get rid of ret if it's 0
+if [ "$RET" = "0" ]; then
+	RET=""
+fi
 
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$PROMPT_BASE_DIR/bin"
 
-# Clear ret 
-if [ "$RET" -eq 0 ]; then
-	RET=""
+# Get git info for my prompt
+GIT_BRANCH=$(git_prompt_lite.sh)
+
+# Switch theme if in git dir
+if [ -n "$GIT_BRANCH" ]; then
+	$PROMPT_THEME_DIR/unicode && exit;
 fi
+
+# }}}
+
+# Shortcut variables {{{
 
 # Color shortcut variables
 RED='\[\e[1;31m\]'
@@ -22,8 +36,10 @@ DARK_CYAN='\[\e[0;36m\]'
 WHITE='\[\e[1;37m\]'
 NORM='\[\e[m\]'
 
+# }}}
+
 echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w \
-${DARK_GREEN}$(git_prompt_lite.sh)\
+${DARK_GREEN}${GIT_BRANCH}\
 \n${RED}${RET} ${WHITE}$ ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
