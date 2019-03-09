@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Save the return value of the last command
+RET="$1"
+
+# Get rid of ret if it's 0
+if [ "$RET" = "0" ]; then
+	RET=""
+fi
+
+# Update path to include folder with necessary prompt scripts
+# NOTE: This doesn't update the path outside this script
+PATH="$PATH:$PROMPT_BASE_DIR/bin"
+
+# Shortcut variables {{{
+
+# Color shortcut variables
+RED='\[\e[1;31m\]'
+DARK_GREEN='\[\e[0;32m\]'
+GREEN='\[\e[1;32m\]'
+DARK_MAGENTA='\[\e[0;35m\]'
+CYAN='\[\e[1;36m\]'
+DARK_CYAN='\[\e[0;36m\]'
+WHITE='\[\e[1;37m\]'
+NORM='\[\e[m\]'
+
+# Unicode
+PARTIAL_DIFF='\xE2\x88\x82'
+EMPTY_SET='\xE2\x88\x85'
+INCREMENT='\xE2\x88\x86'
+THEREFORE='\xE2\x88\xB4'
+LAMBDA='\xCE\xBB'
+TSU='\xE3\x83\x84'
+BALLOT_X='\xE2\x9C\x98'
+HEAVY_RARR='\xE2\x9E\x94'
+
+# }}}
+
+echo -e "${GREEN}\w$(git_prompt.sh)\
+\n${WHITE} ${LAMBDA} ${NORM}"
+
+# vim: foldmethod=marker foldmarker={{{,}}}
