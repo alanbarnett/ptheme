@@ -6,6 +6,10 @@ This script/set of scripts allow you to easily customize your prompt with
 real-time updatable theme files that are easy to read and edit, and convenient
 commands to list/change/edit themes.
 
+## Screenshot
+
+![Some of the included themes and commands](/ptheme_themes.png?raw=true "themes_scrot")
+
 ## Information
 
 Here's the [stackoverflow question](https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command) that started this whole project.
