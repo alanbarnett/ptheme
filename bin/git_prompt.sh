@@ -1,5 +1,9 @@
 #!/bin/sh
 
+COLOR_GOOD='\e[0;32m'
+COLOR_UNTRACKED='\e[1;33m'
+COLOR_BAD='\e[1;31m'
+
 if [ "$GIT_PROMPT" -eq 1 ]; then
 	STATUS=$(git status -sb 2> /dev/null)
 
@@ -17,11 +21,11 @@ if [ "$GIT_PROMPT" -eq 1 ]; then
 		NUM_OTHER=$(( $NUM_STATUS - $NUM_UNTRACKED - 1 ))
 
 		if [ $NUM_OTHER -gt 0 ]; then
-			printf "\e[1;37m->\e[1;31m$BRANCH\e[m"
+			printf "\e[1;37m->$COLOR_BAD$BRANCH\e[m"
 		elif [ $NUM_UNTRACKED -gt 0 ]; then
-			printf "\e[1;37m->\e[1;33m$BRANCH\e[m"
+			printf "\e[1;37m->$COLOR_UNTRACKED$BRANCH\e[m"
 		else
-			printf "\e[1;37m->\e[1;32m$BRANCH\e[m"
+			printf "\e[1;37m->$COLOR_GOOD$BRANCH\e[m"
 		fi
 	fi
 fi
