@@ -36,7 +36,7 @@ HEAVY_RARR='\xE2\x9E\x94'
 
 # }}}
 
-echo -e "${GREEN}\w$(git_prompt.sh)\
+printf "${GREEN}\w$(git_prompt.sh)\
 \n${WHITE} ${LAMBDA} ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
