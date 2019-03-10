@@ -9,15 +9,18 @@ export PROMPT_BASE_DIR="$HOME/clones/ptheme"
 # Path of prompt theme directory (used to avoid rewriting the path)
 export PROMPT_THEME_DIR="$PROMPT_BASE_DIR/themes"
 
-# Variable to enable/disable git information in prompt
-export GIT_PROMPT=1
+# Path of prompt plugins
+export PROMPT_PLUGINS_DIR="$PROMPT_BASE_DIR/plugins"
 
 # }}}
 
-# Functions {{{ 
+# Plugins {{{
 
 # Source utils file for core functions
-. "$PROMPT_BASE_DIR"/utils.sh
+. "$PROMPT_PLUGINS_DIR"/utils.sh
+
+# Add git prompt ability
+. "$PROMPT_PLUGINS_DIR"/git.sh
 
 # }}}
 
