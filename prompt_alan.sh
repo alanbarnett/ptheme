@@ -1,7 +1,9 @@
+#!/bin/sh
+
 # Variables {{{
 
 # Default prompt theme
-export PROMPT_THEME="twoline"
+export PROMPT_THEME="twoline-lite"
 
 # Path of base directory (used in theme scripts to find bin folder)
 export PROMPT_BASE_DIR="$HOME/bin/ptheme"
@@ -33,9 +35,9 @@ prompt_command ()
 
 PROMPT_COMMAND=prompt_command
 
-# }}}
-
 # How many directories to display before truncating
 PROMPT_DIRTRIM=8
+
+# }}}
 
 # vim: foldmethod=marker foldmarker={{{,}}}
