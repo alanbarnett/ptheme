@@ -1,0 +1,46 @@
+#!/bin/sh
+
+#PS1="\n\[\033[1;37m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '$bold${red}\u'; else echo '$bold${green}\u'; fi)\[\033[1;37m\])\342\224\200(\[\033[1;34m\]\#\[\033[1;37m\])\342\224\200(\[\033[1;33m\]\@ \d\[\033[1;37m\])\[\033[1;37m\]\n\342\224\224\342\224\200(\[\033[1;32m\]\w\[\033[1;37m\])\342\224\200(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -lah | grep -m 1 total | sed 's/total //')b\[\033[1;37m\])\342\224\200> \[\033[0m\]"
+
+# Config {{{
+
+# String for the date command
+DATE_SEQ="+%a %b %d %r"
+
+# }}}
+
+# Shortcut variables {{{
+
+# Color shortcut variables
+RED='\[\e[1;31m\]'
+GREEN='\[\e[1;32m\]'
+BLUE='\[\e[1;34m\]'
+CYAN='\[\e[1;36m\]'
+WHITE='\[\e[1;37m\]'
+NORM='\[\e[m\]'
+
+# Box printing shortcut variables
+BOX_TOPL='\342\224\214'
+BOX_BOTL='\342\224\224'
+BOX_HORIZ='\342\224\200'
+
+# }}}
+
+# Save the exit value of the last command (comes in as $1)
+RET="$1"
+
+# Update path to include folder with necessary prompt scripts
+# NOTE: This doesn't update the path outside this script
+PATH="$PATH:$PROMPT_BASE_DIR/bin"
+
+echo "\n\
+${WHITE}${BOX_TOPL}[${CYAN}\u${WHITE}]\
+${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
+${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
+${BOX_HORIZ}[${RED}${RET}${WHITE}]\
+$(need_to_reboot.sh)\
+\n${WHITE}${BOX_BOTL}\
+${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
+${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
+
+# vim: foldmethod=marker foldmarker={{{,}}}
