@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Config {{{
+
 # Save the return value of the last command
 RET="$1"
 
@@ -11,6 +13,8 @@ fi
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$PROMPT_BASE_DIR/bin"
+
+# }}}
 
 # Shortcut variables {{{
 
@@ -37,6 +41,6 @@ HEAVY_RARR='\xE2\x9E\x94'
 # }}}
 
 printf "${GREEN}\w$(git_prompt.sh)\
-\n${WHITE} ${LAMBDA} ${NORM}"
+\n${RED}${RET} ${WHITE}${LAMBDA} ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
