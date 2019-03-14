@@ -58,7 +58,9 @@ echo "\n\
 $(date "+${DATE_STR}${TIME_STR}")\
 \n${YELLOW}[\
 ${MAGENTA}\u${WHITE}@${DARK_MAGENTA}\h\
-${YELLOW}] ${WHITE}-> \
+${WHITE}:$(battery_prompt.sh)\
+${YELLOW}]\
+${WHITE} -> \
 ${GREEN}\w${DARK_GREEN}${GIT_BRANCH}\
 \n${RED}${RET} ${WHITE}$ ${NORM}"
 
