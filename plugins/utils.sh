@@ -25,7 +25,18 @@ pt ()
 }
 
 # Function to open the current theme in your editor
+# No args: edit current theme
+# One arg: check if theme exists, edit if so, print error if no
+# Multiple args: ignored. you must use "" if you want a space in the name
 ept ()
 {
-	"$EDITOR" "$PROMPT_THEME_DIR"/"$PROMPT_THEME"
+	if [ -z "$1" ]; then
+		"$EDITOR" "$PROMPT_THEME_DIR/$PROMPT_THEME"
+	else
+		if [ -f "$PROMPT_THEME_DIR/$1" ]; then
+			"$EDITOR" "$PROMPT_THEME_DIR/$1"
+		else
+			echo "Theme not in $PROMPT_THEME_DIR"
+		fi
+	fi
 }
