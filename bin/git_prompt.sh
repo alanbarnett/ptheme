@@ -9,7 +9,7 @@ if [ "$GIT_PROMPT" -eq 1 ]; then
 
 	if [ -n "$STATUS" ]; then
 		NUM_STATUS=$(printf "$STATUS\n" | wc -l)
-		BRANCH=$(echo "$STATUS" | tr "..." "\n" | sed -n "s/^## \(.*\)$/\1/p")
+		BRANCH=$(echo "$STATUS" | sed "s/\.\.\./\n/" | sed -n "s/^## \(.*\)$/\1/p")
 		UNTRACKED=$(echo "$STATUS" | grep "^?? ")
 
 		if [ -n "$UNTRACKED" ]; then
