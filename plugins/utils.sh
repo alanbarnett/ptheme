@@ -7,6 +7,17 @@ lpt ()
 	ls "$PROMPT_THEME_DIR"
 }
 
+# Helper function to check if a theme exists
+_check_theme_exists()
+{
+	if [ -f "$PROMPT_THEME_DIR/$1" ]; then
+		return 0
+	else
+		echo "Theme \"$1\" not in $PROMPT_THEME_DIR"
+		return 1
+	fi
+}
+
 # Function to quickly switch themes
 # No args: display current theme
 # One arg: check if theme exists, switch to it if so, print error if no
@@ -16,11 +27,7 @@ pt ()
 	if [ -z "$1" ]; then
 		echo "$PROMPT_THEME"
 	else
-		if [ -f "$PROMPT_THEME_DIR/$1" ]; then
-			PROMPT_THEME="$1"
-		else
-			echo "Theme not in $PROMPT_THEME_DIR"
-		fi
+		_check_theme_exists "$1" && PROMPT_THEME="$1"
 	fi
 }
 
@@ -33,10 +40,6 @@ ept ()
 	if [ -z "$1" ]; then
 		"$EDITOR" "$PROMPT_THEME_DIR/$PROMPT_THEME"
 	else
-		if [ -f "$PROMPT_THEME_DIR/$1" ]; then
-			"$EDITOR" "$PROMPT_THEME_DIR/$1"
-		else
-			echo "Theme not in $PROMPT_THEME_DIR"
-		fi
+		_check_theme_exists "$1" && "$EDITOR" "$PROMPT_THEME_DIR/$1"
 	fi
 }
