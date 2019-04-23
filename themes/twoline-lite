@@ -19,7 +19,8 @@ GIT_BRANCH=$(git_prompt_lite.sh)
 
 # Switch theme if in git dir
 if [ -n "$GIT_BRANCH" ]; then
-	$PROMPT_THEME_DIR/unicode "$1" && exit;
+	$PROMPT_THEME_DIR/unicode "$1";
+	exit;
 fi
 
 # }}}
