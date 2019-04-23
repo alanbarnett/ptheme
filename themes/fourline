@@ -62,6 +62,6 @@ ${WHITE}:$(battery_prompt.sh)\
 ${YELLOW}]\
 ${WHITE} -> \
 ${GREEN}\w${DARK_GREEN}${GIT_BRANCH}\
-\n${RED}${RET} ${WHITE}$ ${NORM}"
+${NORM}\n${RED}${RET} ${WHITE}$ ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

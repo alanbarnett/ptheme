@@ -39,6 +39,6 @@ echo "${WHITE}${BOX_TOPL}[${CYAN}\u@${CYAN}\h${WHITE}]\
 ${BOX_HORIZ}(${GREEN}\w${GIT_BRANCH}${WHITE})\
 ${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
 ${BOX_HORIZ}[${RED}${RET}${WHITE}]\
-\n "
+${NORM}\n "
 
 # vim: foldmethod=marker foldmarker={{{,}}}

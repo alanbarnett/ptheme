@@ -34,6 +34,6 @@ PATH="$PATH:$PROMPT_BASE_DIR/bin"
 echo "${WHITE}${BOX_TOPL}[${CYAN}\u@\h${WHITE}]\
 ${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
 ${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
-\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
+${NORM}\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

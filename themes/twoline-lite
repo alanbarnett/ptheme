@@ -40,6 +40,6 @@ NORM='\[\e[m\]'
 
 echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w \
 ${DARK_GREEN}${GIT_BRANCH}\
-\n${RED}${RET} ${WHITE}$ ${NORM}"
+${NORM}\n${RED}${RET} ${WHITE}$ ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
