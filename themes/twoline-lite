@@ -30,9 +30,8 @@ fi
 RED='\[\e[1;31m\]'
 DARK_GREEN='\[\e[0;32m\]'
 GREEN='\[\e[1;32m\]'
-DARK_MAGENTA='\[\e[0;35m\]'
-CYAN='\[\e[1;36m\]'
 DARK_CYAN='\[\e[0;36m\]'
+CYAN='\[\e[1;36m\]'
 WHITE='\[\e[1;37m\]'
 NORM='\[\e[m\]'
 
