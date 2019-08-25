@@ -6,7 +6,7 @@
 RET="$1"
 
 # String for the date command
-DATE_SEQ="+%I:%M:%S %P"
+DATE_SEQ="+%H:%M:%S"
 
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
@@ -39,6 +39,7 @@ ${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
 ${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
 ${BOX_HORIZ}[${RED}${RET}${WHITE}]\
 $(need_to_reboot.sh)\
-${NORM}\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
+${NORM}\n "
+#${NORM}\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
