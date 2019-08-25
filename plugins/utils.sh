@@ -19,13 +19,23 @@ _check_theme_exists()
 
 # Helper function for switching themes
 # Changes the variable for the theme to be ran, and sources some .inputrc files
-# Your default one with main configuration, and one for just the theme
-# Useful if you have lots of common settings, and some that change regularly
+#	Your default one with main readline configuration,
+#		(read by default for all other programs that use readline)
+#	default settings for this set of prompts,
+#		(main settings that apply only to your prompt)
+#		(for ex. your default readline turns on show-mode-in-prompt, but most
+#		prompts aren't set up to support it. instead of adding inputrc's for
+#		all of them to turn off settings you don't want from your main readline
+#		config, make those changes in .inputrc in the theme directory.)
+#	and one for just the theme
+#		(good for visual settings specific to the current theme)
 _switch_theme()
 {
 	PROMPT_THEME="$1"
 	[ -f "$HOME/.inputrc" ] &&
 		bind -f "$HOME/.inputrc"
+	[ -f "$PROMPT_THEME_DIR/.inputrc" ] &&
+		bind -f "$PROMPT_THEME_DIR/.inputrc"
 	[ -f "$PROMPT_THEME_DIR/.$PROMPT_THEME.inputrc" ] &&
 		bind -f "$PROMPT_THEME_DIR/.$PROMPT_THEME.inputrc"
 	return 0
