@@ -4,7 +4,7 @@ COLOR_GOOD='\e[0;32m'
 COLOR_UNTRACKED='\e[1;33m'
 COLOR_BAD='\e[1;31m'
 
-if [ "$GIT_PROMPT" -eq 1 ]; then
+if [ "$GIT_PROMPT" = "1" ]; then
 	STATUS=$(git status -sb 2> /dev/null)
 
 	if [ -n "$STATUS" ]; then
