@@ -8,12 +8,12 @@ if [ "$GIT_PROMPT" -eq 1 ]; then
 	STATUS=$(git status -sb 2> /dev/null)
 
 	if [ -n "$STATUS" ]; then
-		NUM_STATUS=$(printf "$STATUS\n" | wc -l)
+		NUM_STATUS=$(echo "$STATUS" | wc -l)
 		BRANCH=$(echo "$STATUS" | sed "s/\.\.\./\n/" | sed -n "s/^## \(.*\)$/\1/p")
 		UNTRACKED=$(echo "$STATUS" | grep "^?? ")
 
 		if [ -n "$UNTRACKED" ]; then
-			NUM_UNTRACKED=$(printf "$UNTRACKED\n" | wc -l)
+			NUM_UNTRACKED=$(echo "$UNTRACKED" | wc -l)
 		else
 			NUM_UNTRACKED=0
 		fi
