@@ -44,7 +44,7 @@ _switch_theme()
 # Function to quickly switch themes
 # No args: display current theme
 # One arg: check if theme exists, switch to it if so, print error if no
-#			also run that theme's inputrc file
+#			also refresh the inputrc files
 # Multiple args: ignored. you must use "" if you want a space in the name
 pt ()
 {

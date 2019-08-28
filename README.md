@@ -2,9 +2,9 @@
 
 Prompt theme configuration tool for bash
 
-This script/set of scripts allow you to easily customize your prompt with
-real-time updatable theme files that are easy to read and edit, and convenient
-commands to list/change/edit themes.
+This script/set of scripts allow you to easily customize your prompt (and
+readline!) with real-time updatable theme files that are easy to read and edit,
+and convenient commands to list/change/edit themes.
 
 ## Screenshot
 
@@ -15,29 +15,53 @@ commands to list/change/edit themes.
 Here's the [stackoverflow question](https://stackoverflow.com/questions/3058325/what-is-the-difference-between-ps1-and-prompt-command) that started this whole project.
 
 The file `prompt.sh` has the basic setup for adding these themes into your
-bashrc. Basically, you make a function that sets `PS1` to a script, and call
-that function from `PROMPT_COMMAND`, which will run whatever command you
-specify each time you display `PS1`. 
+bashrc.
+To understand it, you must know some things:
+ - The `PS1` variable is where your prompt is stored in bash.
+ - The `PROMPT_COMMAND` variable can be set to the name of a function who sets
+ the `PS1` variable.
+
+So, I made a function that runs a script (or a "theme"), and uses the string it
+produces as your prompt. It is set up this way to allow you additional freedom
+when scripting your prompt, which is usually much cleaner looking than an
+incredibly long `PS1` set in your `.bashrc`. It can be set up to do some cool
+things, like changing the prompt automatically if you're in a git repository,
+or using custom inputrc configuration globally and per-theme to make vim mode
+strings integrate with the prompts that need it, and not on the ones that
+don't.
+
+> Quick story about why it's set up that way. I have a `.inputrc` file in my
+> home directory, which sets my readline to be in vim mode, turns on mode
+> printing, sets the default mode strings, and adds a binding to get into
+> movement mode. The problem comes when I switch to a prompt that isn't set up
+> to work with the mode string (prompts that have boxes drawn around them). I
+> don't want to make a .inputrc file for each one of them, I'd rather make
+> theme-specific ones just for the themes that have vim mode strings
+> integrated. So, I set up a global rules file that would let you turn off the
+> mode string printing, so that it can be turned back on with the themes that
+> use it.
 
 The `prompt.sh` file is just the default. You are encouraged to make your own,
 with your own additional configuration if needed (for example, my
 `prompt_alan.sh` file sources `plugins/utils.sh`, which includes a few
-functions for managing your prompt from the command line. See **plugins** for
-more info). The things in `prompt.sh` are only run once, where the things in
-the `PROMPT_COMMAND` variable are run every time you get a new prompt.
+functions for managing your prompt from the command line. See the **plugins**
+section for more info). The things in `prompt.sh` are only run once, where the
+things in the `PROMPT_COMMAND` variable's function (i.e. your theme script) are
+run every time you get a new prompt.
 
-Additional themes should be placed in the base/themes folder. The included
-themes place all used scripts inside the base/bin folder, and locally set the
-PATH to include it. Also, the included themes will NOT have a .sh extension,
-while all additional scripts that are used WILL have the .sh extension.
+Additional themes should be placed in the /themes folder. The included themes
+place all used scripts inside the /bin folder, and locally set the PATH to
+include it. Also, as a style note, the included themes will NOT have a .sh
+extension, while all additional scripts that are used WILL have the .sh
+extension.
 
-To change themes from the command line (also see **plugins**)
+To change themes from the command line (also see **plugins**), run:
 
-`$ PROMPT_THEME="theme name"`
+`PROMPT_THEME="theme name"`
 
 ex.
 
-`$ PROMPT_THEME=twoline-lite`
+`PROMPT_THEME=twoline-lite`
 
 It is not yet multi-shell compatible, but I imagine that it could be. I would
 need to write a prompt file and possibly also a theme file for the other
@@ -49,7 +73,11 @@ Remove (or comment out) all `PS1` and `PROMPT_COMMAND` configuration from your
 `.bashrc`, and add the following line:
 
 ```
-. [path_to_prompt.sh]
+. [path/to/prompt.sh]
+```
+ex.
+```
+. $HOME/bin/ptheme/prompt_alan.sh
 ```
 
 It will source the `prompt.sh` file, which exports some default variables
@@ -102,7 +130,8 @@ you want to switch to a theme with spaces in the name, you must surround it
 with quotes.
 
 `ept` is a command that will open your `$EDITOR` with the current theme (for
-quick editing)
+quick editing). You can also give it the name of a theme as an argument to
+edit.
 
 #### plugins/git.sh
 
