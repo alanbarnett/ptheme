@@ -113,3 +113,14 @@ control git printing, and this function to set it from the command line:
 prompt, by changing the `GIT_PROMPT` variable (note that the only reason this
 works is because I check the value of the `GIT_PROMPT` variable before running
 any git commands in the prompt scripts).
+
+#### plugins/divider.sh
+
+This plugin is for controlling the `ENABLE_DIVIDER` function. It sets it to 1
+initially, as well. It also gives this function for controlling it:
+
+`divider` is a command that takes "on" or "off" as parameters, and sets the
+variable to a 1 or 0. This function is very similar to gitpt, except it
+controls the variable for printing an 80 column divider. You can print your
+divider in any way you like, but also included in the bin/ folder is a script
+called 80col_divider.sh that echo's a string of 80 dots.

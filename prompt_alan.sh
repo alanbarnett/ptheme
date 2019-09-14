@@ -24,6 +24,9 @@ export PROMPT_PLUGINS_DIR="$PROMPT_BASE_DIR/plugins"
 # Add git prompt ability
 . "$PROMPT_PLUGINS_DIR"/git.sh
 
+# Add function for enabling/disabling an 80 column separator
+. "$PROMPT_PLUGINS_DIR"/divider.sh
+
 # }}}
 
 # Prompt command {{{

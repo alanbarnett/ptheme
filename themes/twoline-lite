@@ -25,7 +25,7 @@ fi
 
 # }}}
 
-# Shortcut variables {{{
+# Variables {{{
 
 # Color shortcut variables
 RED='\[\e[1;31m\]'
@@ -36,9 +36,15 @@ CYAN='\[\e[1;36m\]'
 WHITE='\[\e[1;37m\]'
 NORM='\[\e[m\]'
 
+DIVIDER=""
+if [ "$ENABLE_DIVIDER" == "1" ]; then
+	DIVIDER="$(80col_divider.sh)\n"
+fi
+
 # }}}
 
-echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w \
+echo "${DIVIDER}\
+${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w \
 ${DARK_GREEN}${GIT_BRANCH}\
 ${NORM}\n${RED}${RET} ${WHITE}$ ${NORM}"
 
