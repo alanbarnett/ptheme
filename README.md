@@ -170,3 +170,8 @@ called `fullwidth_divider.sh`, which prints a line of hyphens across the full
 width of your terminal (assuming your screen isn't wider than 2000 characters).
 Eventually, I'll have one script that controls the color, character, and length
 of the divider.
+
+### bin
+
+#### TODO
+Make a section in here for each script in the bin folder, and how they are used
