@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# This line quits the script if it's been disabled
+[ "$ENABLE_GIT_PROMPT" != "1" ] && exit
+
 function show_usage()
 {
 	echo "########## git status script ##########
@@ -47,42 +50,40 @@ while [ -n "$1" ]; do
 done
 
 # Dealing with the variables and generating the output strings
-if [ "$ENABLE_GIT_PROMPT" == "1" ]; then
-	if [ -z "$GIT_PROMPT_STATUS" ]; then
-		GIT_PROMPT_STATUS="$(git status -sb 2> /dev/null)"
-		echo "export GIT_PROMPT_STATUS=\"$GIT_PROMPT_STATUS\""
+if [ -z "$GIT_PROMPT_STATUS" ]; then
+	GIT_PROMPT_STATUS="$(git status -sb 2> /dev/null)"
+	echo "export GIT_PROMPT_STATUS=\"$GIT_PROMPT_STATUS\""
+fi
+
+if [ -n "$GIT_PROMPT_STATUS" ]; then
+	if [ -n "$GET_BRANCH" ]; then
+		BRANCH=$(echo "$GIT_PROMPT_STATUS" | sed -e "s/\.\.\./ /" -ne "s/^## //p")
+		echo "export GIT_PROMPT_BRANCH=\"$BRANCH\""
 	fi
 
-	if [ -n "$GIT_PROMPT_STATUS" ]; then
-		if [ -n "$GET_BRANCH" ]; then
-			BRANCH=$(echo "$GIT_PROMPT_STATUS" | sed -e "s/\.\.\./ /" -ne "s/^## //p")
-			echo "export GIT_PROMPT_BRANCH=\"$BRANCH\""
+	if [ -n "$GET_COLOR" ]; then
+		# Don't override variable if it's already set, but provide defaults
+		[ -z "$GIT_PROMPT_COLOR_GOOD" ] && GIT_PROMPT_COLOR_GOOD="\e[0;32m"
+		[ -z "$GIT_PROMPT_COLOR_UNTRACKED" ] && GIT_PROMPT_COLOR_UNTRACKED="\e[1;33m"
+		[ -z "$GIT_PROMPT_COLOR_BAD" ] && GIT_PROMPT_COLOR_BAD="\e[1;31m"
+
+		NUM_STATUS=$(echo "$GIT_PROMPT_STATUS" | wc -l)
+		UNTRACKED=$(echo "$GIT_PROMPT_STATUS" | grep "^?? ")
+
+		if [ -n "$UNTRACKED" ]; then
+			NUM_UNTRACKED=$(echo "$UNTRACKED" | wc -l)
+		else
+			NUM_UNTRACKED=0
 		fi
 
-		if [ -n "$GET_COLOR" ]; then
-			# Don't override variable if it's already set, but provide defaults
-			[ -z "$GIT_PROMPT_COLOR_GOOD" ] && GIT_PROMPT_COLOR_GOOD="\e[0;32m"
-			[ -z "$GIT_PROMPT_COLOR_UNTRACKED" ] && GIT_PROMPT_COLOR_UNTRACKED="\e[1;33m"
-			[ -z "$GIT_PROMPT_COLOR_BAD" ] && GIT_PROMPT_COLOR_BAD="\e[1;31m"
+		NUM_OTHER=$(( $NUM_STATUS - $NUM_UNTRACKED - 1 ))
 
-			NUM_STATUS=$(echo "$GIT_PROMPT_STATUS" | wc -l)
-			UNTRACKED=$(echo "$GIT_PROMPT_STATUS" | grep "^?? ")
-
-			if [ -n "$UNTRACKED" ]; then
-				NUM_UNTRACKED=$(echo "$UNTRACKED" | wc -l)
-			else
-				NUM_UNTRACKED=0
-			fi
-
-			NUM_OTHER=$(( $NUM_STATUS - $NUM_UNTRACKED - 1 ))
-
-			if [ $NUM_OTHER -gt 0 ]; then
-				echo "export GIT_PROMPT_COLOR=\"$GIT_PROMPT_COLOR_BAD\""
-			elif [ $NUM_UNTRACKED -gt 0 ]; then
-				echo "export GIT_PROMPT_COLOR=\"$GIT_PROMPT_COLOR_UNTRACKED\""
-			else
-				echo "export GIT_PROMPT_COLOR=\"$GIT_PROMPT_COLOR_GOOD\""
-			fi
+		if [ $NUM_OTHER -gt 0 ]; then
+			echo "export GIT_PROMPT_COLOR=\"$GIT_PROMPT_COLOR_BAD\""
+		elif [ $NUM_UNTRACKED -gt 0 ]; then
+			echo "export GIT_PROMPT_COLOR=\"$GIT_PROMPT_COLOR_UNTRACKED\""
+		else
+			echo "export GIT_PROMPT_COLOR=\"$GIT_PROMPT_COLOR_GOOD\""
 		fi
 	fi
 fi
