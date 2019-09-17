@@ -45,9 +45,16 @@ The `prompt.sh` file is just the default. You are encouraged to make your own,
 with your own additional configuration if needed (for example, my
 `prompt_alan.sh` file sources `plugins/utils.sh`, which includes a few
 functions for managing your prompt from the command line. See the **plugins**
-section for more info). The things in `prompt.sh` are only run once, where the
-things in the `PROMPT_COMMAND` variable's function (i.e. your theme script) are
-run every time you get a new prompt.
+section for more info). The things in your `prompt.sh` are only run once,
+except for the function that `PROMPT_COMMAND` is set to - that runs every time
+you get a new prompt. Which also means that any scripting you do in that
+function (and your theme script, which is called in that function) gets ran for
+every new prompt, instead of once globally for your session. This means you can
+easily set up plugins that control things for all of your different themes, or
+just one! For example, maybe not every theme needs to load git information.
+But, maybe you want all of them to have a toggleable divider! Then for the
+global settings, you could define color code variables that don't need
+re-created every time.
 
 Additional themes should be placed in the /themes folder. The included themes
 place all used scripts inside the /bin folder, and locally set the PATH to
@@ -66,6 +73,12 @@ ex.
 It is not yet multi-shell compatible, but I imagine that it could be. I would
 need to write a prompt file and possibly also a theme file for the other
 shells, or look into ways to make the theme files work for any shell.
+
+**UPDATE:** I've been thinking about different ways to make the themes shell
+agnostic, and I've also learned how to do something similar to `PROMPT_COMMAND`
+in `zsh`, so hopefully these things collide soon. There is a working alpha test
+with `zsh`, and it should be more integrated soon!
+
 
 ## Installation
 
@@ -139,17 +152,21 @@ Also included is the `plugins/git.sh` file, which has the exported variable to
 control git printing, and this function to set it from the command line:
 
 `gitpt` is a command that will turn on or off the git branch information in the
-prompt, by changing the `GIT_PROMPT` variable (note that the only reason this
-works is because I check the value of the `GIT_PROMPT` variable before running
-any git commands in the prompt scripts).
+prompt, by changing the `ENABLE_GIT_PROMPT` variable (note that the only reason
+this works is because I check the value of the `ENABLE_GIT_PROMPT` variable
+before running any git commands in the prompt scripts).
 
 #### plugins/divider.sh
 
-This plugin is for controlling the `ENABLE_DIVIDER` function. It sets it to 1
+This plugin is for controlling the `ENABLE_DIVIDER` variable. It sets it to 1
 initially, as well. It also gives this function for controlling it:
 
 `divider` is a command that takes "on" or "off" as parameters, and sets the
 variable to a 1 or 0. This function is very similar to gitpt, except it
 controls the variable for printing an 80 column divider. You can print your
 divider in any way you like, but also included in the bin/ folder is a script
-called 80col_divider.sh that echo's a string of 80 dots.
+called `80col_divider.sh` that echo's a string of 80 dots. There is also one
+called `fullwidth_divider.sh`, which prints a line of hyphens across the full
+width of your terminal (assuming your screen isn't wider than 2000 characters).
+Eventually, I'll have one script that controls the color, character, and length
+of the divider.
