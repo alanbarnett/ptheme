@@ -44,24 +44,35 @@ NORM='\[\e[m\]'
 DATE_STR="${CYAN}%a ${DARK_CYAN}%b %d"
 TIME_STR=" ${BLUE}%r"
 
-# Get git info for my prompt
-GIT_BRANCH=$(git_prompt_lite.sh)
+# Network status as the @ sign
+NETWORK_PROMPT_COLOR="$(network_status_color.sh)"
+NETWORK_PROMPT="${NETWORK_PROMPT_COLOR}@${NORM}"
 
-# Modify git branch
-if [ -n "$GIT_BRANCH" ]; then
-	GIT_BRANCH="${WHITE}: ${DARK_GREEN}${GIT_BRANCH}"
+# Get battery percentage and status
+BATTERY_PROMPT="$(battery_percent.sh)"
+if [ -n "$BATTERY_PROMPT" ]; then
+	BATTERY_PROMPT_COLOR="\[$(battery_percent_color.sh ${BATTERY_PROMPT})\]"
+	BATTERY_PROMPT="${WHITE}:${BATTERY_PROMPT_COLOR}${BATTERY_PROMPT}%${NORM}"
+fi
+
+# Get git info for my prompt
+eval "$(git_prompt.sh -b -c)"
+if [ -n "$GIT_PROMPT_STATUS" ]; then
+	GIT_PROMPT="${WHITE}: ${GIT_PROMPT_COLOR}${GIT_PROMPT_BRANCH}${NORM}"
 fi
 
 # }}}
 
-echo "\n\
+echo "\n\n\
 $(date "+${DATE_STR}${TIME_STR}")\
 \n${YELLOW}[\
-${MAGENTA}\u${WHITE}@${DARK_MAGENTA}\h\
-${WHITE}:$(battery_prompt.sh)\
+${MAGENTA}\u${WHITE}\
+${NETWORK_PROMPT}\
+${DARK_MAGENTA}\h\
+${BATTERY_PROMPT}\
 ${YELLOW}]\
 ${WHITE} -> \
-${GREEN}\w${DARK_GREEN}${GIT_BRANCH}\
+${GREEN}\w${GIT_PROMPT}\
 ${NORM}\n${RED}${RET} ${WHITE}$ ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

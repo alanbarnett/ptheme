@@ -2,8 +2,12 @@
 
 # Config {{{
 
-# String for the date command
-DATE_SEQ="+%I:%M:%S %P"
+# Save the exit value of the last command
+RET="$1"
+
+# Update path to include folder with necessary prompt scripts
+# NOTE: This doesn't update the path outside this script
+PATH="$PATH:$PROMPT_BASE_DIR/bin"
 
 # }}}
 
@@ -24,16 +28,18 @@ BOX_HORIZ='\342\224\200'
 
 # }}}
 
-# Save the exit value of the last command
-RET="$1"
+# Get git information
+eval "$(git_prompt.sh -b -c)"
+if [ -n "$GIT_PROMPT_STATUS" ]; then
+	GIT_PROMPT="${WHITE}->\[${GIT_PROMPT_COLOR}\]${GIT_PROMPT_BRANCH}"
+fi
 
-# Update path to include folder with necessary prompt scripts
-# NOTE: This doesn't update the path outside this script
-PATH="$PATH:$PROMPT_BASE_DIR/bin"
+# Variable for the time
+TIME_PROMPT="${BLUE}$(date "+%H:%M:%S")"
 
 echo "${WHITE}${BOX_TOPL}[${CYAN}\u@\h${WHITE}]\
-${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
-${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
+${BOX_HORIZ}(${GREEN}\w${GIT_PROMPT}${WHITE})\
+${BOX_HORIZ}(${TIME_PROMPT}${WHITE})\
 ${NORM}\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

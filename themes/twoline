@@ -1,18 +1,17 @@
 #!/bin/sh
 
-# Config {{{
+# Startup config {{{
 
 # Save the exit value of the last command (comes in as $1)
 RET="$1"
-
-# String for the date command
-DATE_SEQ="+%H:%M:%S"
 
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$PROMPT_BASE_DIR/bin"
 
 # }}}
+
+# Variables {{{
 
 # Shortcut variables {{{
 
@@ -31,14 +30,42 @@ BOX_HORIZ='\342\224\200'
 
 # }}}
 
+# Network status
+NETWORK_STATUS_COLOR="\[$(network_status_color.sh)\]"
+NETWORK_STATUS="${NETWORK_STATUS_COLOR}@"
+
+# Git info
+eval "$(git_prompt.sh -b -c)"
+if [ -n "$GIT_PROMPT_STATUS" ]; then
+	GIT_PROMPT="${WHITE}->${GIT_PROMPT_COLOR}${GIT_PROMPT_BRANCH}${NORM}"
+fi
+
+# Get battery percentage and status
+BATTERY_PROMPT="$(battery_percent.sh)"
+if [ -n "$BATTERY_PROMPT" ]; then
+	BATTERY_PROMPT_COLOR="\[$(battery_percent_color.sh ${BATTERY_PROMPT})\]"
+	BATTERY_PROMPT="${BATTERY_PROMPT_COLOR}${BATTERY_PROMPT}%${NORM}"
+fi
+
+# Time and color
+TIME_COLOR="$BLUE"
+TIME="${TIME_COLOR}$(date '+%H:%M:%S')"
+
+# Check to see if I need to reboot to finish kernel update
+if check_kernel_behind.sh; then
+	REBOOT_CHECK="${WHITE}${BOX_HORIZ}(\[\e[1;5;31m\]Reboot!\[\e[0;1;37m\])${NORM}"
+fi
+
+# }}}
+
 echo "${WHITE}${BOX_TOPL}[${CYAN}\u\
-$(network_status.sh)\
+${NETWORK_STATUS}\
 ${CYAN}\h${WHITE}]\
-${BOX_HORIZ}(${GREEN}\w$(git_prompt.sh)${WHITE})\
-${BOX_HORIZ}($(battery_prompt.sh)${WHITE})\
-${BOX_HORIZ}(${BLUE}$(date "${DATE_SEQ}")${WHITE})\
+${BOX_HORIZ}(${GREEN}\w${GIT_PROMPT}${WHITE})\
+${BOX_HORIZ}(${BATTERY_PROMPT}${WHITE})\
+${BOX_HORIZ}(${TIME}${WHITE})\
 ${BOX_HORIZ}[${RED}${RET}${WHITE}]\
-$(need_to_reboot.sh)\
+${REBOOT_CHECK}\
 ${NORM}\n "
 #${NORM}\n${WHITE}${BOX_BOTL}${BOX_HORIZ}(${CYAN}\$${WHITE}> ${NORM}"
 
