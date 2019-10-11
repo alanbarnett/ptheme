@@ -29,6 +29,9 @@ export PROMPT_PLUGINS_DIR="$PROMPT_BASE_DIR/plugins"
 
 # }}}
 
+# "Switch" to current prompt theme using pt plugin, which reloads inputrc files
+pt "$PROMPT_THEME"
+
 # Prompt command {{{
 
 prompt_command ()
