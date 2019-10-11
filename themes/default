@@ -24,9 +24,7 @@ RET="$1"
 
 # Make an error message (to add spacing to error code)
 ERROR=""
-
-# Clear ret 
-if [ "$RET" -ne 0 ]; then
+if [ "$RET" != "0" ]; then
 	ERROR="$RET "
 fi
 
@@ -38,4 +36,4 @@ DARK_CYAN='\[\e[0;36m\]'
 WHITE='\[\e[1;37m\]'
 NORM='\[\e[m\]'
 
-echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w ${RED}${ERROR}${WHITE}$ ${NORM}"
+echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w ${RED}${ERROR}${WHITE}\$ ${NORM}"
