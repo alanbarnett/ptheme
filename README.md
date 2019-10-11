@@ -144,7 +144,12 @@ with quotes.
 
 `ept` is a command that will open your `$EDITOR` with the current theme (for
 quick editing). You can also give it the name of a theme as an argument to
-edit.
+edit. Additionally, if your editor is vim or neovim, using this command opens
+your theme's .inputrc in the preview window. You can move back and forth from
+it with `CTRL-w p`, and close it with `CTRL-w z`.
+Note that support for other editors that allow you to open multiple windows on
+the command line can easily be added, if anyone has requests for other editors
+then submit a pull request! :)
 
 #### plugins/git.sh
 

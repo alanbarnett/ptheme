@@ -67,8 +67,17 @@ pt ()
 ept ()
 {
 	if [ -z "$1" ]; then
-		"$EDITOR" "$PROMPT_THEME_DIR/$PROMPT_THEME"
+		theme="$PROMPT_THEME"
 	else
-		_check_theme_exists "$1" && "$EDITOR" "$PROMPT_THEME_DIR/$1"
+		theme="$1"
 	fi
+
+	case "$EDITOR" in
+		vim | nvim)
+			"$EDITOR" "$PROMPT_THEME_DIR/$theme" -c "ped $PROMPT_THEME_DIR/.$theme.inputrc"
+			;;
+		**)
+			"$EDITOR" "$PROMPT_THEME_DIR/$theme"
+			;;
+	esac
 }
