@@ -7,7 +7,7 @@ export PROMPT_BASE_DIR="$HOME/bin/ptheme"
 # Path of prompt theme directory (used to avoid rewriting the path)
 export PROMPT_THEME_DIR="$PROMPT_BASE_DIR/themes"
 
-prompt_command ()
+function prompt_command ()
 {
     PS1=$("$PROMPT_THEME_DIR"/"$PROMPT_THEME" "$?")
 }

@@ -3,7 +3,7 @@
 # Variables {{{
 
 # Default prompt theme
-export PROMPT_THEME="twoline-lite"
+export PROMPT_THEME="twoline"
 
 # Path of base directory (used in theme scripts to find bin folder)
 export PROMPT_BASE_DIR="$HOME/bin/ptheme"
@@ -26,9 +26,6 @@ export PROMPT_PLUGINS_DIR="$PROMPT_BASE_DIR/plugins"
 
 # Add git prompt ability
 . "$PROMPT_PLUGINS_DIR"/git.sh
-
-# Add function for enabling/disabling an 80 column separator
-. "$PROMPT_PLUGINS_DIR"/divider.sh
 
 # }}}
 
