@@ -21,7 +21,7 @@ battery_status="$(cat "$status_file")"
 # Define default color variables, if they aren't already set
 [ -z "$BATTERY_COLORS" ] && \
 	BATTERY_COLORS=(124 160 196 202 208 214 220 184 148 112 76 40)
-[ -z "$BATTERY_CHARGING_COLOR" ] && BATTERY_CHARGING_COLOR="201"
+[ -z "$BATTERY_CHARGING_COLOR" ] && BATTERY_CHARGING_COLOR="13"
 
 if [ "$battery_status" == "Charging" ] || [ "$battery_status" == "Unknown" ]; then
 	color="$BATTERY_CHARGING_COLOR"
