@@ -24,7 +24,7 @@ RETURN_STATUS_COLOR="$COLOR_RED"
 REBOOT_COLOR="\[\e[1;5;31m\]"
 
 # Source box printing plugin to get box characters with their color
-source "$PROMPT_PLUGINS_DIR/box.sh"
+. "$PROMPT_PLUGINS_DIR/box.sh"
 
 # }}}
 
