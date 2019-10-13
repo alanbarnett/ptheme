@@ -1,14 +1,17 @@
 #!/bin/sh
 
-# Get a list of connected interfaces, by name
-interfaces="$(ip -br addr | awk '/ UP /{ print $1 }')"
-
 # Don't overwrite defined colors, but provide defaults
 [ -z "$NET_PROMPT_COLOR_ETHERNET" ] && NET_PROMPT_COLOR_ETHERNET="\e[1;31m"
 [ -z "$NET_PROMPT_COLOR_WIFI" ] && NET_PROMPT_COLOR_WIFI="\e[0;36m"
 [ -z "$NET_PROMPT_COLOR_BOTH" ] && NET_PROMPT_COLOR_BOTH="\e[38;5;135m"
 [ -z "$NET_PROMPT_COLOR_DOWN" ] && NET_PROMPT_COLOR_DOWN="\e[1;37m"
 [ -z "$NET_PROMPT_COLOR_OTHER" ] && NET_PROMPT_COLOR_OTHER="\e[38;5;215m"
+
+# Exit if no ip command
+[ -z "$(which ip)" ] && echo "$NET_PROMPT_COLOR_DOWN" && exit
+
+# Get a list of connected interfaces, by name
+interfaces="$(ip -br addr | awk '/ UP /{ print $1 }')"
 
 # Check if not connected
 [ -z "$interfaces" ] && echo "$NET_PROMPT_COLOR_DOWN" && exit
