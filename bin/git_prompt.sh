@@ -57,7 +57,7 @@ fi
 
 if [ -n "$GIT_PROMPT_STATUS" ]; then
 	if [ -n "$GET_BRANCH" ]; then
-		BRANCH=$(echo "$GIT_PROMPT_STATUS" | sed -e "s/\.\.\./ /" -ne "s/^## //p")
+		BRANCH=$(echo "$GIT_PROMPT_STATUS" | sed -e "s/\.\.\..*//" -ne "s/^## //p")
 		echo "export GIT_PROMPT_BRANCH=\"$BRANCH\""
 	fi
 
