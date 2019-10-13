@@ -18,6 +18,9 @@ export PROMPT_PLUGINS_DIR="$PROMPT_BASE_DIR/plugins"
 
 # Plugins {{{
 
+# Color variable shortcuts
+. "$PROMPT_PLUGINS_DIR"/colors.sh
+
 # Source utils file for core functions
 . "$PROMPT_PLUGINS_DIR"/utils.sh
 
