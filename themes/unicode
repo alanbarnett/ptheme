@@ -5,28 +5,18 @@
 # Save the return value of the last command
 RET="$1"
 
-# Get rid of ret if it's 0
-if [ "$RET" = "0" ]; then
-	RET=""
-fi
-
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$PROMPT_BASE_DIR/bin"
 
+# Block colors
+DIRECTORY_COLOR="$COLOR_GREEN"
+RETURN_STATUS_COLOR="$COLOR_RED"
+PROMPT_COLOR="$COLOR_WHITE"
+
 # }}}
 
 # Shortcut variables {{{
-
-# Color shortcut variables
-RED='\[\e[1;31m\]'
-DARK_GREEN='\[\e[0;32m\]'
-GREEN='\[\e[1;32m\]'
-DARK_MAGENTA='\[\e[0;35m\]'
-CYAN='\[\e[1;36m\]'
-DARK_CYAN='\[\e[0;36m\]'
-WHITE='\[\e[1;37m\]'
-NORM='\[\e[m\]'
 
 # Unicode
 PARTIAL_DIFF='\xE2\x88\x82'
@@ -40,13 +30,30 @@ HEAVY_RARR='\xE2\x9E\x94'
 
 # }}}
 
+# Prompt variables {{{
+
 # Get info for git prompt
 eval "$(git_prompt.sh -b -c)"
 if [ -n "$GIT_PROMPT_STATUS" ]; then
-	GIT_PROMPT=" ${GIT_PROMPT_COLOR}${GIT_PROMPT_BRANCH}"
+	GIT_BLOCK=" \[${GIT_PROMPT_COLOR}\]${GIT_PROMPT_BRANCH}"
 fi
 
-printf "${GREEN}\w${GIT_PROMPT}\
-${NORM}\n${RED}${RET} ${WHITE}${LAMBDA} ${NORM}"
+# Directory and git status
+DIRECTORY_BLOCK="${DIRECTORY_COLOR}\w${GIT_BLOCK}"
+
+# Return status block, only if it exists and is non-zero
+if [ -n "$RET" ] && [ "$RET" != "0" ]; then
+	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RET}"
+fi
+
+# Prompt character block
+PROMPT_BLOCK="${PROMPT_COLOR}${LAMBDA}"
+
+# }}}
+
+# Printf is needed because of the unicode character, it's more portable than
+# echo -e
+printf "${DIRECTORY_BLOCK}\n\
+${RETURN_STATUS_BLOCK} ${PROMPT_BLOCK} ${COLOR_NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

@@ -13,7 +13,7 @@
 # This script will run every time
 # you hit enter, so just remember
 # that when you add extra functions
-# and wonder why it's slowing down.
+# and notice that it's slowing down.
 # ##  ######  ##
 #
 ####    ####################    ####
@@ -36,4 +36,8 @@ DARK_CYAN='\[\e[0;36m\]'
 WHITE='\[\e[1;37m\]'
 NORM='\[\e[m\]'
 
-echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w ${RED}${ERROR}${WHITE}\$ ${NORM}"
+echo "${CYAN}\u \
+${DARK_CYAN}\h \
+${GREEN}\w \
+${RED}${ERROR}\
+${WHITE}\$ ${NORM}"

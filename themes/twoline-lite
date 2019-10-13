@@ -5,14 +5,16 @@
 # Save the return value of the last command
 RET="$1"
 
-# Get rid of ret if it's 0
-if [ "$RET" = "0" ]; then
-	RET=""
-fi
-
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
 PATH="$PATH:$PROMPT_BASE_DIR/bin"
+
+# Block colors
+USER_COLOR="$COLOR_CYAN"
+HOST_COLOR="$COLOR_DARK_CYAN"
+DIRECTORY_COLOR="$COLOR_GREEN"
+RETURN_STATUS_COLOR="$COLOR_RED"
+PROMPT_COLOR="$COLOR_WHITE"
 
 # Get git info for my prompt
 eval "$(git_prompt.sh)"
@@ -25,21 +27,16 @@ fi
 
 # }}}
 
-# Variables {{{
+# Prompt variables {{{
 
-# Color shortcut variables
-RED='\[\e[1;31m\]'
-DARK_GREEN='\[\e[0;32m\]'
-GREEN='\[\e[1;32m\]'
-DARK_CYAN='\[\e[0;36m\]'
-CYAN='\[\e[1;36m\]'
-WHITE='\[\e[1;37m\]'
-NORM='\[\e[m\]'
+# Return status block, only if the value exists and is non-zero
+if [ -n "$RET" ] && [ "$RET" != "0" ]; then
+	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RET}"
+fi
 
 # }}}
 
-echo "${CYAN}\u ${DARK_CYAN}\h ${GREEN}\w \
-${DARK_GREEN}${GIT_BRANCH}\
-${NORM}\n${RED}${RET} ${WHITE}$ ${NORM}"
+echo "${USER_COLOR}\u ${HOST_COLOR}\h ${DIRECTORY_COLOR}\w\n\
+${RETURN_STATUS_BLOCK} ${PROMPT_COLOR}\$ ${COLOR_NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

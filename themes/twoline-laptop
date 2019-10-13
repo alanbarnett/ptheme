@@ -2,7 +2,7 @@
 
 # Config {{{
 
-# Save the exit value of the last command
+# Save the exit value of the last command (comes in as $1)
 RET="$1"
 
 # Update path to include folder with necessary prompt scripts
@@ -16,11 +16,12 @@ TIME_STRING="%H:%M:%S"
 BOX_COLOR="$COLOR_WHITE"
 
 # Block colors
-USER_HOST_COLOR="$COLOR_CYAN"
+USER_COLOR="$COLOR_CYAN"
+HOST_COLOR="$COLOR_CYAN"
 DIRECTORY_COLOR="$COLOR_GREEN"
 TIME_COLOR="$COLOR_BLUE"
 RETURN_STATUS_COLOR="$COLOR_RED"
-PROMPT_COLOR="$COLOR_CYAN"
+REBOOT_COLOR="\[\e[1;5;31m\]"
 
 # Source box printing plugin to get box characters with their color
 source "$PROMPT_PLUGINS_DIR/box.sh"
@@ -29,37 +30,52 @@ source "$PROMPT_PLUGINS_DIR/box.sh"
 
 # Prompt variables {{{
 
-# User and hostname
-USER_HOST_BLOCK="${BOX_TOPL}[${USER_HOST_COLOR}\u@\h${BOX_COLOR}]"
+# Network status
+NETWORK_BLOCK_COLOR="\[$(network_status_color.sh)\]"
+NETWORK_BLOCK="${NETWORK_BLOCK_COLOR}@"
 
-# Get git information
+# Git info
 eval "$(git_prompt.sh -b -c)"
 if [ -n "$GIT_PROMPT_STATUS" ]; then
 	GIT_BLOCK="${COLOR_WHITE}->\[${GIT_PROMPT_COLOR}\]${GIT_PROMPT_BRANCH}"
 fi
 
-# Directory block
+# Directory and git info
 DIRECTORY_BLOCK="${BOX_HORIZ}(${DIRECTORY_COLOR}\w${GIT_BLOCK}${BOX_COLOR})"
 
-# Variable for the time
+# Get battery percentage and status
+BATTERY_PERCENT="$(battery_percent.sh)"
+if [ -n "$BATTERY_PERCENT" ]; then
+	BATTERY_PERCENT_COLOR="\[$(battery_percent_color.sh ${BATTERY_PERCENT})\]"
+	BATTERY_PERCENT="${BATTERY_PERCENT_COLOR}${BATTERY_PERCENT}%"
+	BATTERY_BLOCK="${BOX_HORIZ}(${BATTERY_PERCENT}${BOX_COLOR})"
+fi
+
+# Time and color
 TIME="${TIME_COLOR}$(date "+${TIME_STRING}")"
 TIME_BLOCK="${BOX_HORIZ}(${TIME}${BOX_COLOR})"
 
-# Return status block, only if it exists and is non-zero
+# Return status block, only if the value exists and is non-zero
 if [ -n "$RET" ] && [ "$RET" != "0" ]; then
 	RETURN_STATUS_BLOCK="${BOX_HORIZ}[${RETURN_STATUS_COLOR}${RET}${BOX_COLOR}]"
 fi
 
-# Prompt character block
-PROMPT_BLOCK="${BOX_HORIZ}(${PROMPT_COLOR}\$${BOX_COLOR}>"
+# Check to see if I need to reboot to finish kernel update
+if check_kernel_behind.sh; then
+	REBOOT_BLOCK="${BOX_HORIZ}(${REBOOT_COLOR}Reboot!${COLOR_NORM}${BOX_COLOR})"
+fi
 
 # }}}
 
-echo "${USER_HOST_BLOCK}\
+echo "${BOX_TOPL}[${USER_COLOR}\u\
+${NETWORK_BLOCK}\
+${HOST_COLOR}\h${BOX_COLOR}]\
 ${DIRECTORY_BLOCK}\
+${BATTERY_BLOCK}\
 ${TIME_BLOCK}\
-\n${BOX_BOTL}\
 ${RETURN_STATUS_BLOCK}\
-${PROMPT_BLOCK} ${COLOR_NORM}"
+${REBOOT_BLOCK}\
+\n "
+#\n${BOX_BOTL}${BOX_HORIZ}(${COLOR_CYAN}\$${BOX_COLOR}> ${COLOR_NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
