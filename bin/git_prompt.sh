@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This line quits the script if it's been disabled
 [ "$ENABLE_GIT_PROMPT" != "1" ] && exit
