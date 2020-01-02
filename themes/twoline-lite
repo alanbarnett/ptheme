@@ -29,6 +29,20 @@ fi
 
 # Prompt variables {{{
 
+# This is used to calculate the amount of space to the other side of the screen
+line_one="$USER ${HOSTNAME%%.*} ${PWD/$HOME/~}"
+remaining_space="$(( $(tput cols) - ${#line_one} ))"
+max_width_of_hours_bar=46
+gap_width="$(( $remaining_space - $max_width_of_hours_bar ))"
+
+# This gets info about hours and makes the bar
+my_hours="$(hours --no-color)"
+# Pass the value of my_hours in to the bar generator
+my_hours_bar="$(printf "$(hours=${my_hours} hours_bar) ${COLOR_WHITE}- %5s" "$my_hours")"
+#echo "$my_hours_bar"
+# Create final string, padded with empty space
+HOURS_BAR="$(printf "%${gap_width}s $my_hours_bar" "")"
+
 # Return status block, only if the value exists and is non-zero
 if [ -n "$RET" ] && [ "$RET" != "0" ]; then
 	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RET}"
@@ -36,7 +50,9 @@ fi
 
 # }}}
 
-echo "${USER_COLOR}\u ${HOST_COLOR}\h ${DIRECTORY_COLOR}\w\n\
+echo "${USER_COLOR}\u ${HOST_COLOR}\h ${DIRECTORY_COLOR}\w\
+${HOURS_BAR}\
+${COLOR_NORM}\n\
 ${RETURN_STATUS_BLOCK} ${PROMPT_COLOR}\$ ${COLOR_NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
