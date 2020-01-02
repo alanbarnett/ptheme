@@ -40,6 +40,7 @@ pt "$PROMPT_THEME"
 function prompt_command ()
 {
     PS1=$("$PROMPT_THEME_DIR"/"$PROMPT_THEME" "$?")
+	[ "$ENABLE_DIVIDER" = "1" ] && "$PROMPT_BASE_DIR/bin/full_width_divider.sh"
 }
 
 PROMPT_COMMAND=prompt_command
