@@ -1,3 +1,9 @@
+# This inputrc adds a colored mode character for which vim mode you are in. The
+# mode character has other box printing characters around it to integrate with
+# the theme.
+
 set show-mode-in-prompt on
 set vi-ins-mode-string "\1\e[1;37m\2\342\224\224\342\224\200(\1\e[1;36m\2+\1\e[1;37m\2>\1\e[m\2"
 set vi-cmd-mode-string "\1\e[1;37m\2\342\224\224\342\224\200(\1\e[1;36m\2:\1\e[1;37m\2>\1\e[m\2"
+
+# vim: ft=readline

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+ptheme_user="$USER"
+# Dammit not all shells export this variable! I need to have a higher level
+# initialization. fuck! I guess did I really need it at prompt level though,
+# the check for user and hostname? I wonder if that stuff really gets changed
+# while running and needs to update. hmm.
+# I've determined that it can be done at a higher level, which is nice. Themes
+# should be written in bash and expect a few certain parameters, like username
+# hostname and current directory at least. it would be nice for those things
+# (other than current directory i suppose) to be generated outside. seems like
+# the current directory could be styled however you like for each prompt, i'm
+# not sure how I'll integrate that yet though. all I know is that changing the
+# hostname of a running system causes x to completely shit itself, and nothing
+# else really changes either. bash still reports the old hostname until
+# launching it again, which works perfectly fine for me.
+ptheme_host="${HOSTNAME%%.*}"  # gets a substr of everything until the first .*
+
+echo "$ptheme_user $ptheme_host"

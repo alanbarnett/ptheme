@@ -4,13 +4,13 @@
 # Function to list available themes
 lpt ()
 {
-	ls "$PROMPT_THEME_DIR"
+	ls "$PTHEME_THEME_DIR"
 }
 
 # Helper function to check if a theme exists
 _check_theme_exists()
 {
-	if [ -f "$PROMPT_THEME_DIR/$1" ]; then
+	if [ -f "$PTHEME_THEME_DIR/$1" ]; then
 		return 0
 	else
 		return 1
@@ -31,13 +31,13 @@ _check_theme_exists()
 #		(good for visual settings specific to the current theme)
 _switch_theme()
 {
-	PROMPT_THEME="$1"
+	PTHEME_THEME="$1"
 	[ -f "$HOME/.inputrc" ] &&
 		bind -f "$HOME/.inputrc"
-	[ -f "$PROMPT_THEME_DIR/.inputrc" ] &&
-		bind -f "$PROMPT_THEME_DIR/.inputrc"
-	[ -f "$PROMPT_THEME_DIR/.$PROMPT_THEME.inputrc" ] &&
-		bind -f "$PROMPT_THEME_DIR/.$PROMPT_THEME.inputrc"
+	[ -f "$PTHEME_THEME_DIR/.inputrc" ] &&
+		bind -f "$PTHEME_THEME_DIR/.inputrc"
+	[ -f "$PTHEME_THEME_DIR/.$PTHEME_THEME.inputrc" ] &&
+		bind -f "$PTHEME_THEME_DIR/.$PTHEME_THEME.inputrc"
 	return 0
 }
 
@@ -49,12 +49,12 @@ _switch_theme()
 pt ()
 {
 	if [ -z "$1" ]; then
-		echo "$PROMPT_THEME"
+		echo "$PTHEME_THEME"
 	else
 		if _check_theme_exists "$1"; then
 			_switch_theme "$1"
 		else
-			echo "Theme \"$1\" not in $PROMPT_THEME_DIR"
+			echo "Theme \"$1\" not in $PTHEME_THEME_DIR"
 			return 1
 		fi
 	fi
@@ -67,17 +67,17 @@ pt ()
 ept ()
 {
 	if [ -z "$1" ]; then
-		theme="$PROMPT_THEME"
+		theme="$PTHEME_THEME"
 	else
 		theme="$1"
 	fi
 
 	case "$EDITOR" in
 		vim | nvim)
-			"$EDITOR" "$PROMPT_THEME_DIR/$theme" -c "ped $PROMPT_THEME_DIR/.$theme.inputrc"
+			"$EDITOR" "$PTHEME_THEME_DIR/$theme" -c "ped $PTHEME_THEME_DIR/.$theme.inputrc"
 			;;
 		**)
-			"$EDITOR" "$PROMPT_THEME_DIR/$theme"
+			"$EDITOR" "$PTHEME_THEME_DIR/$theme"
 			;;
 	esac
 }

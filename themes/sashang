@@ -8,7 +8,6 @@
 # Modified slightly
 #	I added a BLUE variable, which previously was used but not defined
 # Used mostly as reference
-#	I definitely use the return code of the last command bit, it's really clever
 #
 
 GREEN="\[\033[0;32m\]"

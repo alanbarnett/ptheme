@@ -2,18 +2,15 @@
 
 # Config {{{
 
-# Save the exit value of the last command
-RET="$1"
-
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
-PATH="$PATH:$PROMPT_BASE_DIR/bin"
+PATH="$PATH:$PTHEME_BASE_DIR/bin"
 
 # String for the time
 TIME_STRING="%H:%M:%S"
 
 # Color for box characters
-BOX_COLOR="$COLOR_WHITE"
+[ -z "$BOX_COLOR" ] && BOX_COLOR="$COLOR_WHITE"
 
 # Block colors
 USER_HOST_COLOR="$COLOR_CYAN"
@@ -23,7 +20,7 @@ RETURN_STATUS_COLOR="$COLOR_RED"
 PROMPT_COLOR="$COLOR_CYAN"
 
 # Source box printing plugin to get box characters with their color
-. "$PROMPT_PLUGINS_DIR/box.sh"
+. "$PTHEME_PLUGINS_DIR/box.sh"
 
 # }}}
 
@@ -45,9 +42,9 @@ DIRECTORY_BLOCK="${BOX_HORIZ}(${DIRECTORY_COLOR}\w${GIT_BLOCK}${BOX_COLOR})"
 TIME="${TIME_COLOR}$(date "+${TIME_STRING}")"
 TIME_BLOCK="${BOX_HORIZ}(${TIME}${BOX_COLOR})"
 
-# Return status block, only if it exists and is non-zero
-if [ -n "$RET" ] && [ "$RET" != "0" ]; then
-	RETURN_STATUS_BLOCK="${BOX_HORIZ}[${RETURN_STATUS_COLOR}${RET}${BOX_COLOR}]"
+# Return status block, only if the value is non-zero
+if [ "$RETURN_STATUS" != "0" ]; then
+	RETURN_STATUS_BLOCK="${BOX_HORIZ}[${RETURN_STATUS_COLOR}${RETURN_STATUS}${BOX_COLOR}]"
 fi
 
 # Prompt character block

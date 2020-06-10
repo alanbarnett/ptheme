@@ -2,12 +2,9 @@
 
 # Config {{{
 
-# Save the return value of the last command
-RET="$1"
-
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
-PATH="$PATH:$PROMPT_BASE_DIR/bin"
+PATH="$PATH:$PTHEME_BASE_DIR/bin"
 
 # Block colors
 USER_COLOR="$COLOR_CYAN"
@@ -21,7 +18,7 @@ eval "$(git_prompt.sh)"
 
 # Switch theme if in git dir
 if [ -n "$GIT_PROMPT_STATUS" ]; then
-	"$PROMPT_THEME_DIR/unicode" "$1";
+	"$PTHEME_THEME_DIR/unicode";
 	exit;
 fi
 
@@ -29,14 +26,14 @@ fi
 
 # Prompt variables {{{
 
-# Return status block, only if the value exists and is non-zero
-if [ -n "$RET" ] && [ "$RET" != "0" ]; then
-	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RET}"
+# Return status block, only if the value is non-zero
+if [ "$RETURN_STATUS" != "0" ]; then
+	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RETURN_STATUS}"
 fi
 
 # }}}
 
-echo "${USER_COLOR}\u ${HOST_COLOR}\h ${DIRECTORY_COLOR}\w\n\
-${RETURN_STATUS_BLOCK} ${PROMPT_COLOR}\$ ${COLOR_NORM}"
+echo "${USER_COLOR}\u ${HOST_COLOR}\h ${DIRECTORY_COLOR}\w\
+${COLOR_NORM}\n${RETURN_STATUS_BLOCK} ${PROMPT_COLOR}\$ ${COLOR_NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}

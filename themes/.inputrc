@@ -1,1 +1,5 @@
+# The default inputrc for all themes
+
+# This setting enables individual theme inputrc's to turn on the mode and show
+# it in a way to fit that prompt
 set show-mode-in-prompt off

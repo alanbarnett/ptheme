@@ -2,12 +2,9 @@
 
 # Config {{{
 
-# Save the return value of the last command
-RET="$1"
-
 # Update path to include folder with necessary prompt scripts
 # NOTE: This doesn't update the path outside this script
-PATH="$PATH:$PROMPT_BASE_DIR/bin"
+PATH="$PATH:$PTHEME_BASE_DIR/bin"
 
 # Block colors
 DIRECTORY_COLOR="$COLOR_GREEN"
@@ -41,9 +38,9 @@ fi
 # Directory and git status
 DIRECTORY_BLOCK="${DIRECTORY_COLOR}\w${GIT_BLOCK}"
 
-# Return status block, only if it exists and is non-zero
-if [ -n "$RET" ] && [ "$RET" != "0" ]; then
-	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RET}"
+# Return status block, only if the value is non-zero
+if [ "$RETURN_STATUS" != "0" ]; then
+	RETURN_STATUS_BLOCK=" ${RETURN_STATUS_COLOR}${RETURN_STATUS}"
 fi
 
 # Prompt character block
@@ -53,7 +50,7 @@ PROMPT_BLOCK="${PROMPT_COLOR}${LAMBDA}"
 
 # Printf is needed because of the unicode character, it's more portable than
 # echo -e
-printf "${DIRECTORY_BLOCK}\n\
+printf "${DIRECTORY_BLOCK}${COLOR_NORM}\n\
 ${RETURN_STATUS_BLOCK} ${PROMPT_BLOCK} ${COLOR_NORM}"
 
 # vim: foldmethod=marker foldmarker={{{,}}}
