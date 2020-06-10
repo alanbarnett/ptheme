@@ -4,13 +4,13 @@
 # Function to list available themes
 lpt ()
 {
-	ls "$PTHEME_THEME_DIR"
+	ls "$PTHEME_THEMES_DIR"
 }
 
 # Helper function to check if a theme exists
 _check_theme_exists()
 {
-	if [ -f "$PTHEME_THEME_DIR/$1" ]; then
+	if [ -f "$PTHEME_THEMES_DIR/$1" ]; then
 		return 0
 	else
 		return 1
@@ -34,10 +34,10 @@ _switch_theme()
 	PTHEME_THEME="$1"
 	[ -f "$HOME/.inputrc" ] &&
 		bind -f "$HOME/.inputrc"
-	[ -f "$PTHEME_THEME_DIR/.inputrc" ] &&
-		bind -f "$PTHEME_THEME_DIR/.inputrc"
-	[ -f "$PTHEME_THEME_DIR/.$PTHEME_THEME.inputrc" ] &&
-		bind -f "$PTHEME_THEME_DIR/.$PTHEME_THEME.inputrc"
+	[ -f "$PTHEME_THEMES_DIR/.inputrc" ] &&
+		bind -f "$PTHEME_THEMES_DIR/.inputrc"
+	[ -f "$PTHEME_THEMES_DIR/.$PTHEME_THEME.inputrc" ] &&
+		bind -f "$PTHEME_THEMES_DIR/.$PTHEME_THEME.inputrc"
 	return 0
 }
 
@@ -54,7 +54,7 @@ pt ()
 		if _check_theme_exists "$1"; then
 			_switch_theme "$1"
 		else
-			echo "Theme \"$1\" not in $PTHEME_THEME_DIR"
+			echo "Theme \"$1\" not in $PTHEME_THEMES_DIR"
 			return 1
 		fi
 	fi
@@ -74,10 +74,10 @@ ept ()
 
 	case "$EDITOR" in
 		vim | nvim)
-			"$EDITOR" "$PTHEME_THEME_DIR/$theme" -c "ped $PTHEME_THEME_DIR/.$theme.inputrc"
+			"$EDITOR" "$PTHEME_THEMES_DIR/$theme" -c "ped $PTHEME_THEMES_DIR/.$theme.inputrc"
 			;;
 		**)
-			"$EDITOR" "$PTHEME_THEME_DIR/$theme"
+			"$EDITOR" "$PTHEME_THEMES_DIR/$theme"
 			;;
 	esac
 }
