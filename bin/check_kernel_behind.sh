@@ -10,8 +10,8 @@
 # won't be able to use kernel modules correctly while it's not finished
 # updating.
 
-UNAME=$(uname -r)
-KERNEL=$(/usr/bin/pacman -Q linux | tr _ - | awk -F ' ' '{ print $2 }' -)
+UNAME=$(uname -r | tr . -)
+KERNEL=$(/usr/bin/pacman -Q linux | cut -d ' ' -f 2 | tr . -)
 
 # Exit with an error if they are the same
 # This way, the script fails "if" checks if your running kernel is fine
