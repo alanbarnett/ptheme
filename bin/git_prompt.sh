@@ -52,13 +52,13 @@ done
 # Dealing with the variables and generating the output strings
 if [ -z "$GIT_PROMPT_STATUS" ]; then
 	GIT_PROMPT_STATUS="$(git status -sb 2> /dev/null)"
-	echo "export GIT_PROMPT_STATUS=\"$GIT_PROMPT_STATUS\""
+	echo "export GIT_PROMPT_STATUS='$GIT_PROMPT_STATUS'"
 fi
 
 if [ -n "$GIT_PROMPT_STATUS" ]; then
 	if [ -n "$GET_BRANCH" ]; then
 		BRANCH=$(echo "$GIT_PROMPT_STATUS" | sed -e "s/\.\.\..*//" -ne "s/^## //p")
-		echo "export GIT_PROMPT_BRANCH=\"$BRANCH\""
+		echo "export GIT_PROMPT_BRANCH='$BRANCH'"
 	fi
 
 	if [ -n "$GET_COLOR" ]; then
