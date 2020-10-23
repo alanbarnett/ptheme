@@ -18,7 +18,7 @@ eval "$(git_prompt.sh)"
 
 # Switch theme if in git dir
 if [ -n "$GIT_PROMPT_STATUS" ]; then
-	"$PTHEME_THEME_DIR/unicode";
+	"$PTHEME_THEMES_DIR/unicode";
 	exit;
 fi
 
